@@ -1,6 +1,7 @@
 package com.airbnb.android.react.maps;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
@@ -34,6 +35,7 @@ public class AirMapPolyline extends AirMapFeature {
     private boolean geodesic;
     private float zIndex;
     private Cap lineCap = new RoundCap();
+    private boolean dashed = false;
 
     public AirMapPolyline(Context context) {
         super(context);
@@ -88,6 +90,7 @@ public class AirMapPolyline extends AirMapFeature {
     }
 
     public void setDashed(boolean dashed) {
+        this.dashed = dashed;
         if (polyline != null) {
             if (dashed) {
                 List<PatternItem> PATTERN_POLYLINE_DOTTED = Arrays.asList(GAP, DOT);
@@ -112,6 +115,10 @@ public class AirMapPolyline extends AirMapFeature {
         options.zIndex(zIndex);
         options.startCap(lineCap);
         options.endCap(lineCap);
+        if(this.dashed){
+            List<PatternItem> PATTERN_POLYLINE_DOTTED = Arrays.asList(GAP, DOT);
+            options.pattern(PATTERN_POLYLINE_DOTTED);
+        }
         return options;
     }
 

@@ -88,9 +88,11 @@ public class AirMapPolyline extends AirMapFeature {
     }
 
     public void setDashed(boolean dashed) {
-        if(dashed){
-            List<PatternItem> PATTERN_POLYLINE_DOTTED = Arrays.asList(GAP, DOT);
-            polyline.setPattern(PATTERN_POLYLINE_DOTTED);
+        if (polyline != null) {
+            if (dashed) {
+                List<PatternItem> PATTERN_POLYLINE_DOTTED = Arrays.asList(GAP, DOT);
+                polyline.setPattern(PATTERN_POLYLINE_DOTTED);
+            }
         }
     }
 
